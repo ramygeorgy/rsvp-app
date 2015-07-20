@@ -14,7 +14,7 @@ Importer
 
 The importer reads in the input CSV file and does the following with each row:
 
-1.  Generates a unique *SLUG* for the guest:
+1.  Generates a unique **SLUG** for the guest:
     This is the portion at the end of the URL that makes it unique to each guest. It is usually one of the following:
 	- lowercase preferred name
 	- lowercase first name
@@ -33,20 +33,20 @@ CSV file format
 ----------------
 The same format is used for input and output but certain columns are ignored when processing the input file (because they are only relevant on the output).
 
-- *Code:* a _generated_ and unique 3-digit code that will be used by the guest when submitting their RSVP online. Used as a form of authentication.
-- *Clients:* the name of the guest's company or blank
-- *Address:* address line 1
-- *Address 2:* address line 2
-- *City:*
-- *State:*
-- *Zip:*
-- *Customer Invited:* invited guest's full name
-- *Preferred Name:* invited guest's preferred name to be addressed with
-- *Salesperson:* the employee name who invited the guest
-- *Status:* has been blank in the past, but I believe this is meant to be an active/inactive flag
-- *SLUG:* a _generated_ URL that's specific to the invited guest. This is where they are directed to submit their RSVP
-- *MSLUG:* a _generated_ URL that's specific to the invited guest. This is where they are directed to submit their RSVP if using a mobile device (this is converted into a QR code)
-- *Unique ID:* a _generated_ unique ID for the invited guest. This is usually the database primary key. (not sure if it's used by anything)
+- **Code:** a _generated_ and unique 3-digit code that will be used by the guest when submitting their RSVP online. Used as a form of authentication.
+- **Clients:** the name of the guest's company or blank
+- **Address:** address line 1
+- **Address 2:** address line 2
+- **City:**
+- **State:**
+- **Zip:**
+- **Customer Invited:** invited guest's full name
+- **Preferred Name:** invited guest's preferred name to be addressed with
+- **Salesperson:** the employee name who invited the guest
+- **Status:** has been blank in the past, but I believe this is meant to be an active/inactive flag
+- **SLUG:** a _generated_ URL that's specific to the invited guest. This is where they are directed to submit their RSVP
+- **MSLUG:** a _generated_ URL that's specific to the invited guest. This is where they are directed to submit their RSVP if using a mobile device (this is converted into a QR code)
+- **Unique ID:** a _generated_ unique ID for the invited guest. This is usually the database primary key. (not sure if it's used by anything)
 
 Public-facing application
 ==========================
