@@ -83,5 +83,17 @@ Backoffice application
 Current process for starting a new event
 =========================================
 
-// TODO
+1. Employees begin building their separate lists of contacts to invite to the party
+1. The indiviual lists are then combined by one person into a single input file
+1. A empty database is created, which replaces the previous year's database
+1. The input file is imported using the importer and the new database is populated
+1. Any additions or modifications to the invitees list is done via separate input files
+
+Limitations of the legacy system
+=================================
+
+- Can only handle one event, hence the need to start with a new database each time
+- There is no concept of an invitee "record" that is maintained separately from the event. Consequently, invitee information has to be imported for each event (i.e. name, address, company etc..)
+- Updates, additions, and deletions are cumbersome because there is no web interface to manage invitees
+
 

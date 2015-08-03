@@ -1,0 +1,3 @@
+Code,Clients,Address,Address 2,City,State,Zip,Customer Invited,Preferred Name,Salesperson,Status,SLUG,MSLUG,Unique ID
+841,ABC Company,PO Box 1234,,Bartlesville,OK,74005,Joseph Smith,Joe,Fadel,,http://rsvp.mycompany.com/joe,http://rsvp.mycompany.com/m/JOE,1
+908,XYZ Company,123 East 2nd Street,,Tulsa,OK,74103,Jane Doe,Jane,Fadel,,http://rsvp.mycompany.com/jane,http://rsvp.mycompany.com/m/JANE,2
