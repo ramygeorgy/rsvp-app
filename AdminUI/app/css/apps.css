@@ -5,7 +5,7 @@ body {
 header {
     display:block;
     border-bottom:1px solid #ccc;
-    padding:2em;
+    padding:0.5em;
     margin-bottom:1em;
 }
 
@@ -18,14 +18,14 @@ header .content, .main .content {
     padding:0em 1em;
 }
 
-
+header .brandlogo {
+    height: 3em;
+}
 #navigation
 {
     display:inline-block;
-    vertical-align: bottom;
-    position:absolute;
-    right:0px;
-    bottom:-19px;
+    vertical-align: middle;
+    margin-top:15px;
 }
 
 .nav-pills > li > a
