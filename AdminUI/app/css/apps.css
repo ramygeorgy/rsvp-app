@@ -1,0 +1,45 @@
+body {
+    font: 300 18px/1.5em 'PT Sans Narrow', arial, sans-serif;
+    color: #8f8e8e;
+}
+header {
+    display:block;
+    border-bottom:1px solid #ccc;
+    padding:2em;
+    margin-bottom:1em;
+}
+
+header .content, .main .content {
+    width:940px;
+    margin:0 auto;
+    position:relative;
+}
+.main .content {
+    padding:0em 1em;
+}
+
+
+#navigation
+{
+    display:inline-block;
+    vertical-align: bottom;
+    position:absolute;
+    right:0px;
+    bottom:-19px;
+}
+
+.nav-pills > li > a
+{
+    font: 300 19px/1.4em 'PT Sans Narrow', arial, sans-serif;
+    font-size:19px;
+    padding:2px 8px;
+    color:#000;
+    margin:0px 9px;
+}
+
+.nav-pills > li > a:hover 
+{
+    background-color: #14A9B8;
+    border-radius: 0.327em;
+    color:#ffffff;
+}

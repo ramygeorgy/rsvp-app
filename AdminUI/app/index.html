@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app="rsvpApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>TPSi RSVP Administration</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:r,b|Open+Sans:r,i,b,bi" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="css/apps.css">
+    
+</head>
+<body>
+
+    <header>
+        <div class="content">
+            <img src="http://www.tpsitulsa.com/wp-content/uploads/2013/11/tpsi_logo.png"/>
+        
+            <nav id="navigation" class="navigation" role="navigation">
+                <ul class="nav nav-pills">
+                    <li><a href="#/home">RSVP Admin Home</a></li>
+                    <li><a href="#/clients">Clients</a></li>
+                    <li><a href="#/events">Events</a></li>
+                    <li><a href="#/staff">Staff</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+    </header>
+
+    <div class="main">
+        <div ng-view class="content"></div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.js"></script>
+    
+    <script src="app.js"></script>
+    <script src="controllers/appControllers.js"></script>
+</body>
+</html>
