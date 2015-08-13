@@ -1,3 +1,18 @@
+.btn.btn-primary {
+    font: 300 19px/1.4em 'PT Sans Narrow', arial, sans-serif;
+    font-size: 19px;
+    padding: 2px 8px;
+    color: #fff;
+    margin: 0px 9px;
+    background-color: #14A9B8;
+    border-color:transparent;
+}
+.btn.btn-primary:hover {
+    background-color: #14A9B8;
+    border-radius: 0.327em;
+    color: #ffffff;
+}
+
 body {
     font: 300 18px/1.5em 'PT Sans Narrow', arial, sans-serif;
     color: #8f8e8e;
