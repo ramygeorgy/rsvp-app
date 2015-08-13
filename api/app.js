@@ -11,16 +11,11 @@ app.get('/', function(req, res) {
 });
 */
 
-var rsvpRouter = express.Router();
+var rsvpRouter = require('./rsvp/');
+var rsvpAdminRouter = require('./rsvpAdmin/');
 
-rsvpRouter.route('/rsvp/someslug')
-	.get(function(req, res) {
-		var resJson = {hello: "This should pull up rsvp record based on slug in url"};
-		
-		res.json(resJson);
-	})
-
-app.use('/api', rsvpRouter);
+app.use('/api/rsvp', rsvpRouter);
+app.use('/api/rsvpAdmin', rsvpAdminRouter);
 
 app.listen(port, function() {
 	console.log('Running on port: ' + port);
