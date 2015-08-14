@@ -4,12 +4,17 @@ var app = express();
 
 var port = process.env.PORT || 3000;
 
-/* this is simple way to do routing but not adequate
-for an api that will have many routes.
-app.get('/', function(req, res) {
-	res.send('welcome to the RSVP api!');
+var rsvpConfig = {
+    dbServer: 'localhost',
+    dbName: 'rsvpDB'
+};
+
+var rsvpDBConnection = require('./db')(rsvpConfig);
+app.use(function(req,res,next) {
+    req.db = rsvpDBConnection;
+    next();
 });
-*/
+
 
 var rsvpRouter = require('./rsvp/');
 var rsvpAdminRouter = require('./rsvpAdmin/');

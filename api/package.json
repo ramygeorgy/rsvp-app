@@ -11,6 +11,8 @@
   "dependencies": {
     "express": "^4.13.3",
     "gulp": "^3.9.0",
-    "gulp-nodemon": "^2.0.3"
+    "gulp-nodemon": "^2.0.3",
+    "mongodb": "^2.0.40",
+    "mongoose": "^4.1.2"
   }
 }
