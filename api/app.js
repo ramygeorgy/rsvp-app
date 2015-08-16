@@ -4,6 +4,10 @@ var app = express();
 
 var port = process.env.PORT || 3000;
 
+
+app.use('/admin', express.static(__dirname + '/../AdminUI'));
+
+
 var rsvpConfig = {
     dbServer: 'localhost',
     dbName: 'rsvpDB'

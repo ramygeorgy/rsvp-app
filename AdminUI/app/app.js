@@ -18,6 +18,12 @@ angular.module('rsvpApp', [
                 authRequired: true 
             }
         })
+        .when('/myaccount', {
+            templateUrl: 'views/staff/myaccount.html',
+            data: { 
+                authRequired: true 
+            }
+        })
         .when('/events', {
             templateUrl: 'views/events/events.html',
             data: { 

@@ -39,8 +39,15 @@ angular.module('rsvpApp')
     $log.log('events Controller');
 }])
 
-.controller('staffController',['$scope','$log',function($scope,$log) {
+.controller('staffController',['$scope','$log','rsvpStaffFactory',function($scope, $log, rsvpStaffFactory) {
     $log.log('staff Controller');
+    $scope.staffList = [];
+    (function init(){
+        rsvpStaffFactory.getStaff().then(function(data) {
+            $scope.staffList = data;
+            console.log($scope.staffList);
+        });
+     })();
 }])
 
 .controller('clientsController',['$scope','$log',function($scope,$log) {

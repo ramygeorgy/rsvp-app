@@ -1,4 +1,15 @@
 <div ng-controller="staffController" class="rsvp-container staff-container">
-        <h1>RSVP - Staff</h1>
+    <h1>RSVP - Staff</h1>
 
+    <div class="staffListContainer">
+        <ul>
+            <li ng-repeat="staff in staffList">
+                {{staff.displayName}}
+            </li>
+        </ul>
+    </div>
+
+    <div class="staffDetail">
+    </div>
+    
 </div>

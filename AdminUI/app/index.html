@@ -7,21 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>TPSi RSVP Administration</title>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    
+
     <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:r,b|Open+Sans:r,i,b,bi" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
-    
-    <link rel="stylesheet" href="css/app.css">
-    
-</head>
-<body ng-controller="rsvpMainController">
 
-    <header>
+    <link rel="stylesheet" href="css/app.css">
+
+</head>
+<body ng-controller="rsvpMainController" class="container-fluid">
+
+    <header class="clearfix">
         <div class="content">
             <img src="http://www.tpsitulsa.com/wp-content/uploads/2013/11/tpsi_logo.png" class="brandlogo"/>
-        
+
             <nav id="navigation" class="navigation pull-right" role="navigation">
                 <ul class="nav nav-pills" ng-show="isLoggedIn()" class="ng-hide">
                     <li><a href="#/home">RSVP Admin Home</a></li>
@@ -40,14 +40,14 @@
     <div class="main">
         <div ng-view class="content"></div>
     </div>
-    
+
     <!--- third party libraries/frameworks --->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-cookies.js"></script>
-    
+
     <!--- external modules --->
     <script src="../modules/rsvpAuthentication/rsvpAuthenticationService.js"></script>
 
@@ -55,6 +55,6 @@
     <script src="app.js"></script>
     <script src="services/rsvpServicesFactories.js"></script>
     <script src="controllers/rsvpControllers.js"></script>
-    
+
 </body>
 </html>
