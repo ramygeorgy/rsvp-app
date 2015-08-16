@@ -1,0 +1,16 @@
+[
+    { 
+        "_id" : ObjectId("55cd84db7a2d302eec360897"), 
+        "firstName" : "Kevin", 
+        "lastName" : "Beesley", 
+        "displayName" : "Kevin B.", 
+        "password" : "P@ssw0rd" 
+    },
+    { 
+        "_id" : ObjectId("55cd85107a2d302eec360898"), 
+        "firstName" : "Ramy", 
+        "lastName" : "Georgy", 
+        "displayName" : "Ramy G.", 
+        "password" : "P@ssw0rd" 
+    }
+]
