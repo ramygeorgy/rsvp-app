@@ -34,6 +34,7 @@ angular.module('rsvpApp')
 .controller('staffController',['$scope','$log','rsvpStaffFactory',function($scope, $log, rsvpStaffFactory) {
     $scope.staffList = [];
     $scope.staffDetail = {};
+    $scope.newStaff = false;
     
     $scope.viewStaffDetail = function(staffId) {
         $log.log('staff:' + staffId);
@@ -44,26 +45,62 @@ angular.module('rsvpApp')
         }
     };
     
+    $scope.createNewStaffDetail = function() {
+        $scope.staffDetail = {displayName:'',firstName:'',lastName:''};
+        $scope.newStaff = true;
+    };
+    
     $scope.closeStaffDetail = function() {
         $scope.staffDetail = {};
+        $scope.newStaff = false;
+    };
+    
+    $scope.removeStaff = function(staffId,$event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        
+        var ret = rsvpStaffFactory.removeStaff(staffId);
+        if(ret)
+        {
+            ret.then(function(data) {
+                if(data === true)
+                {
+                       retrieveStaffList();                    
+                }
+                else {
+                    console.log('Unable to update staff');
+                }
+            });
+        }
+        else{
+            console.log('could not remove staff');
+        }
     };
     
     $scope.saveStaffDetail = function() {
-        var ret = rsvpStaffFactory.updateStaff($scope.staffDetail);
+        var ret = rsvpStaffFactory.saveStaff($scope.staffDetail);
         if(ret)
         {
             ret.then(function(data) {
                 if(data === true)
                 {
                     for(var i = 0; i < $scope.staffList; i++)
-                    {
+                    forblock: {
                         if($scope.staffList[i]._id === $scope.staffDetail._id)
                         {
                             $scope.staffList[i] = $scope.staffDetail;
-                            $scope.staffDetail = {};
-                            break;
+                            break forblock;
                         }
                     }
+                    $scope.closeStaffDetail();
+                            
+                }
+                else if (data._id && data._id.length > 0) {
+                    $scope.staffList.push(data);
+                    $scope.closeStaffDetail();
+                }
+                else {
+                    console.log('Unable to update staff');
                 }
             });
         }
@@ -73,10 +110,15 @@ angular.module('rsvpApp')
         }
     };
     
-    (function init(){
+    function retrieveStaffList()
+    {
         rsvpStaffFactory.getStaff().then(function(data) {
             $scope.staffList = data;
         });
+    }
+    
+    (function init(){
+        retrieveStaffList();
      })();
 }])
 

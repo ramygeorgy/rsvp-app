@@ -1,15 +1,18 @@
 <div ng-controller="staffController" class="rsvp-container staff-container">
-    <h1>RSVP - Staff</h1>
+    <h1>RSVP - Staff <button type="button" class="btn btn-primary" ng-click="createNewStaffDetail();">New</button></h1>
 
-    <div class="staffListContainer" ng-hide="!!staffDetail._id">
+    <div class="staffListContainer" ng-hide="!!staffDetail._id || newStaff">
+        
         <ul class="list-group">
             <li ng-repeat="staff in staffList"  class="list-group-item">
-                <a href ng-click='viewStaffDetail(staff._id);'>{{staff.displayName}}</a>
+                <a href ng-click='viewStaffDetail(staff._id);'>{{staff.displayName}}
+                    <button type="button" class="btn btn-danger pull-right removeBtn" ng-click="removeStaff(staff._id,$event);">Remove</button>
+                </a>
             </li>
         </ul>
     </div>
 
-    <div class="staffDetail" ng-if="staffDetail._id">
+    <div class="staffDetail" ng-if="staffDetail._id || newStaff">
         <form ng-submit="saveStaffDetail();" class="form-horizontal">
             <div class="form-group">
                 <label for="displayname" class="col-sm-2 control-label">Display Name</label>

@@ -31,7 +31,37 @@ module.exports = function(rsvpRouter)
                 });
             }
             
-	   });
+	   })
+       .post(function(req,res) {
+            var Staff = getStaffModel(req, res);
+        
+            if(Staff)
+            {
+                var staffDetail = req.body.staffDetail;
+                
+                if(staffDetail && staffDetail.lastName && staffDetail.lastName.length > 0)
+                {
+                    if(!staffDetail.displayName || staffDetail.displayName.length == 0) {
+                        staffDetail.displayName = staffDetail.firstName + ' ' + staffDetail.lastName;
+                    }
+                    
+                    Staff.create(staffDetail, function(err, newStaff){
+                    
+                        if(err)
+                        {
+                            res.status(500).send(err);
+                        }
+                        else
+                        {
+                            res.json(newStaff);
+                        }
+                    });
+                }
+                else{
+                    res.status(500).send("Last Name is required");
+                }
+            }
+        });
     
     rsvpRouter.route('/staff/:staffId')
         .get(function(req,res) {
@@ -59,46 +89,44 @@ module.exports = function(rsvpRouter)
                 var staffId = req.params.staffId;
                 var staffDetail = req.body.staffDetail;
                 
-                console.log('staffId');
-                console.log(staffId);
-                console.log('req.body');
-                console.log(req.body);
-                
                 if(staffId && staffId.length > 0 && staffDetail && staffDetail._id && staffDetail._id.length > 0)
                 {
-                    console.log(staffDetail);
-                    
                     var staffId = staffDetail._id;
-                    var staffDet = {
-                        firstName: staffDetail.firstName,
-                        lastName: staffDetail.lastName,
-                        displayName: staffDetail.displayName
-                    };
+                    delete staffDetail._id;
                     
-                    console.log('id: ' + staffId);
-                    console.log(staffDet);
+                    Staff.update({_id: staffId}, staffDetail, function(err, results){
                     
-                    Staff.update({_id: staffId}, staffDet, function(err, staff){
-                    
-                    if(err)
-                    {
-                        console.log('err: ' + err);
-                        res.status(500).send(err);
-                    }
-                    else
-                    {
-                        console.log('staff: ' + staff);
-                        res.json(staff);
-                    }
-                });
+                        if(err)
+                        {
+                            res.status(500).send(err);
+                        }
+                        else
+                        {
+                            res.json(results);
+                        }
+                    });
                 }
             }
         })
-        .post(function(req,res) {
+        .delete(function(req,res) {
             var Staff = getStaffModel(req, res);
         
             if(Staff)
             {
+                var staffId = req.params.staffId;
+                if(staffId && staffId.length > 0)
+                {
+                    Staff.remove({_id: staffId}, function(err,results){
+                        if(err)
+                        {
+                            res.status(500).send(err);
+                        }
+                        else
+                        {
+                            res.json(results);
+                        }
+                    });
+                }
             }
         });
 }

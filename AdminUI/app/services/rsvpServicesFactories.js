@@ -10,22 +10,47 @@ angular.module('rsvpApp')
         }).then(function(response) { return response.data; }, function(error) { console.error('Staff Service:  Error retrieving staff (' + error + ')'); });
     };
     
-    service.updateStaff = function(staffDetail)
+    service.saveStaff = function(staffDetail)
     {
         var ret = false;
-        console.log(staffDetail);
         if(staffDetail && staffDetail._id && staffDetail._id.length > 0)
         {
-            console.log('staffid: ' + staffDetail._id);
-            
-            var putURL = restConfig.baseURL + restConfig.resources.staff + '/' + staffDetail._id;
-            
-            console.log('putURL: ' + putURL);
-            
-            ret = $http
+            return updateStaff(staffDetail);
+        }
+        else 
+        {
+            return createStaff(staffDetail);
+        }
+        
+        return ret;
+    };
+    
+    service.removeStaff = function(staffId)
+    {
+        var ret = false;
+        var deleteURL = restConfig.baseURL + restConfig.resources.staff + '/' + staffId;
+        
+        ret = $http.delete(deleteURL)
+                .success(function(data) {
+                    return data;
+                })
+                .then(function(response) {
+                        return true;
+                    },
+                      function(error) {
+                        console.log('delete error: ' + error);
+                    });
+        return ret;
+    };
+    
+    function updateStaff(staffDetail)
+    {
+        var ret = false;
+        var putURL = restConfig.baseURL + restConfig.resources.staff + '/' + staffDetail._id;
+                        
+        ret = $http
                 .put( putURL , {'staffDetail': staffDetail})
                 .success(function(data) {
-                    console.log('success data: ' + data);
                     return data;
                 })
                 .then(function(response) { 
@@ -33,18 +58,33 @@ angular.module('rsvpApp')
                         {
                             return true;
                         }
-                        console.log('response: ');
-                        console.log(response.data);
                         return false;
                     },
                     function(error) { 
-                        console.error('Staff Service:  Error retrieving staff (' + error + ')');
                         return false;
                     });
-        }
-        
         return ret;
-    };
+    }
+    
+    function createStaff(staffDetail)
+    {
+        var ret = false;
+        var postURL = restConfig.baseURL + restConfig.resources.staff;
+                        
+        ret = $http
+                .post( postURL , {'staffDetail': staffDetail})
+                .success(function(data) {
+                    return data;
+                })
+                .then(function(response) { 
+                        return response.data;
+                    },
+                    function(error) { 
+                        console.error('Staff Service:  Error creating staff (' + error + ')');
+                        return false;
+                    });
+        return ret;
+    }
     
     return service;
 })
