@@ -1,3 +1,16 @@
+.staffListContainer .list-group .list-group-item
+{
+    padding:0em;
+}
+.staffListContainer .list-group .list-group-item a {
+    display:block;
+    padding:1em;
+}
+.staffListContainer .list-group .list-group-item a:hover {
+    text-decoration:none;
+    background-color:#f3f3f3;
+}
+
 .btn.btn-primary {
     font: 300 19px/1.4em 'PT Sans Narrow', arial, sans-serif;
     font-size: 19px;

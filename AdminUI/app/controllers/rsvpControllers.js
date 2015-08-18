@@ -1,25 +1,19 @@
 angular.module('rsvpApp')
 
 .controller('rsvpMainController',['$scope','$log','rsvpAuthenticationService',function($scope, $log, AuthService) {
-    $log.log('main Controller');
     $scope.isLoggedIn = function() { return AuthService.isAuthenticated(); };
     $scope.login = function() {
-        $log.log('emiting RSVPLogin event');
         $scope.$emit('RSVPLogin');
     };
     $scope.logout = function() {
-        $log.log('emiting RSVPLogout event');
         $scope.$emit('RSVPLogout');
     };
 }])
 
 .controller('rsvpAuthenticationController', ['$scope','$location','$log','rsvpAuthenticationService',function( $scope, $location, $log, AuthService) {
-    $log.log('authentication Controller');
-    
     $scope.isLoggedIn = function() { return AuthService.isAuthenticated(); };
     
     $scope.authenticateUser = function(pLoginInfo) {
-        $log.log("Authenticate User function()");
         
         var isAuthenticated = AuthService.AuthenticateLogin(pLoginInfo);
         
@@ -32,24 +26,59 @@ angular.module('rsvpApp')
 }])
                                                     
 .controller('homeController',['$scope','$log',function($scope,$log) {
-    $log.log('home Controller');
 }])
 
 .controller('eventsController',['$scope','$log',function($scope,$log) {
-    $log.log('events Controller');
 }])
 
 .controller('staffController',['$scope','$log','rsvpStaffFactory',function($scope, $log, rsvpStaffFactory) {
-    $log.log('staff Controller');
     $scope.staffList = [];
+    $scope.staffDetail = {};
+    
+    $scope.viewStaffDetail = function(staffId) {
+        $log.log('staff:' + staffId);
+        var list = $scope.staffList;
+        if(list && list.length > 0)
+        {
+            $scope.staffDetail = list.filter(function(staff,index) { return staff._id === staffId;})[0];
+        }
+    };
+    
+    $scope.closeStaffDetail = function() {
+        $scope.staffDetail = {};
+    };
+    
+    $scope.saveStaffDetail = function() {
+        var ret = rsvpStaffFactory.updateStaff($scope.staffDetail);
+        if(ret)
+        {
+            ret.then(function(data) {
+                if(data === true)
+                {
+                    for(var i = 0; i < $scope.staffList; i++)
+                    {
+                        if($scope.staffList[i]._id === $scope.staffDetail._id)
+                        {
+                            $scope.staffList[i] = $scope.staffDetail;
+                            $scope.staffDetail = {};
+                            break;
+                        }
+                    }
+                }
+            });
+        }
+        else
+        {
+            console.log('Could not update Staff');
+        }
+    };
+    
     (function init(){
         rsvpStaffFactory.getStaff().then(function(data) {
             $scope.staffList = data;
-            console.log($scope.staffList);
         });
      })();
 }])
 
 .controller('clientsController',['$scope','$log',function($scope,$log) {
-    $log.log('clients Controller');
 }]);

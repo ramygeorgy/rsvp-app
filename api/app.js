@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use(function(req,res,next) {
     next();
 });
 
+app.use(bodyParser.json());
 
 var rsvpRouter = require('./rsvp/');
 var rsvpAdminRouter = require('./rsvpAdmin/');

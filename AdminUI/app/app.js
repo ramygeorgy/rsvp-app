@@ -2,7 +2,7 @@
 // Declare app level module which depends on views, and components
 angular.module('rsvpApp', [
     'ngRoute',
-    'rsvpAuthentication'
+    'ngCookies',
 ])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -54,7 +54,6 @@ angular.module('rsvpApp', [
     $rootScope.$on('$routeChangeStart',function(event,next) {
         if(next.data)
         {
-            $log.log(next);
             var authRequired = next.data.authRequired;
             if(authRequired && !AuthService.isAuthenticated())
             {
@@ -64,12 +63,10 @@ angular.module('rsvpApp', [
         }
     });
     $rootScope.$on('RSVPLogout',function(event,next) {
-        $log.log('logout event');
         AuthService.RemoveAuthenticatedLogin();
         $location.path('/logout');
     });
     $rootScope.$on('RSVPLogin',function(event,next) {
-        $log.log('login event');
         $location.path('/login');
     });
 }]);

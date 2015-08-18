@@ -1,4 +1,4 @@
-angular.module('rsvpAuthentication',['ngCookies'])
+angular.module('rsvpApp')
 .factory('rsvpAuthenticationService',['$http','$cookies','$log',function($http,$cookies,$log) {
     var service = {};
     
@@ -14,8 +14,6 @@ angular.module('rsvpAuthentication',['ngCookies'])
     
     service.AuthenticateLogin = function(loginInfo) {
         var authenticated = false;
-        
-        $log.log("rsvpAuthenticationService.AuthenticateLogin");
         
         if(loginInfo && loginInfo.username && loginInfo.password)
         {
@@ -34,7 +32,6 @@ angular.module('rsvpAuthentication',['ngCookies'])
     
     service.RemoveAuthenticatedLogin = function() {
         $cookies.remove("RSVPUser");
-        $log.log('Removed Authenticated User');
     }
     
     return service;

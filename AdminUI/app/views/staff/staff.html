@@ -1,15 +1,42 @@
 <div ng-controller="staffController" class="rsvp-container staff-container">
     <h1>RSVP - Staff</h1>
 
-    <div class="staffListContainer">
-        <ul>
-            <li ng-repeat="staff in staffList">
-                {{staff.displayName}}
+    <div class="staffListContainer" ng-hide="!!staffDetail._id">
+        <ul class="list-group">
+            <li ng-repeat="staff in staffList"  class="list-group-item">
+                <a href ng-click='viewStaffDetail(staff._id);'>{{staff.displayName}}</a>
             </li>
         </ul>
     </div>
 
-    <div class="staffDetail">
+    <div class="staffDetail" ng-if="staffDetail._id">
+        <form ng-submit="saveStaffDetail();" class="form-horizontal">
+            <div class="form-group">
+                <label for="displayname" class="col-sm-2 control-label">Display Name</label>
+                <div class="col-sm-3">
+                    <input id="displayname" class="form-control input-lg" type="text" ng-model="staffDetail.displayName">
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label for="firstname" class="col-sm-2 control-label">First</label>
+                <div class="col-sm-3">
+                    <input id="firstname" class="form-control input-lg" type="text" ng-model="staffDetail.firstName">
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label for="lastname" class="col-sm-2 control-label">Last</label>
+                <div class="col-sm-3">
+                    <input id="lastname" class="form-control input-lg" type="text" ng-model="staffDetail.lastName">
+                </div>
+            </div>
+            
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" ng-click="closeStaffDetail();">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
     </div>
     
 </div>
