@@ -1,4 +1,32 @@
 <div ng-controller="eventsController" class="rsvp-container events-container">
-        <h1>RSVP - Events</h1>
+        <h1>RSVP - Events <button type="button" class="btn btn-primary" ng-click="createNewEventDetail();">New</button></h1>
+    
+    <div class="eventsListContainer" ng-hide="!!eventDetail._id || newEvent">
+        
+        <ul class="list-group">
+            <li ng-repeat="event in events"  class="list-group-item">
+                <a href ng-click='viewEventDetail(event._id);'>{{event.name}}
+                    <button type="button" class="btn btn-danger pull-right removeBtn" ng-click="removeEvent(event._id,$event);">Remove</button>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="eventDetail" ng-if="eventDetail._id || newEvent">
+        <form ng-submit="saveEventDetail();" class="form-horizontal">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Event Name</label>
+                <div class="col-sm-3">
+                    <input id="name" class="form-control input-lg" type="text" ng-model="eventDetail.name">
+                </div>
+                
+            </div>
+            
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" ng-click="closeEventDetail();">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
     
 </div>

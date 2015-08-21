@@ -66,7 +66,7 @@ header .brandlogo {
     margin:0px 9px;
 }
 
-.nav-pills > li > a:hover 
+.nav-pills > li > a:hover, .nav-pills > li.user-account-menu-item > a
 {
     background-color: #14A9B8;
     border-radius: 0.327em;

@@ -4,15 +4,11 @@
     
     <form ng-submit="authenticateUser(loginInfo)" class="form-horizontal">
         <div class="form-group">
-            <label for="username" class="col-sm-2 control-label">Username</label>
+            <label for="username" class="col-sm-3 control-label">Who are you?</label>
             <div class="col-sm-3">
-                <input id="username" type="text" ng-model="loginInfo.username" class="form-control input-lg">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password" class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-3">
-                <input id="password" type="password" ng-model="loginInfo.password" class="form-control input-lg">
+                <select name="userSelect" ng-model="loginInfo.userId" class="form-control input-lg">
+                    <option ng-repeat="staff in availableStaff" value="{{staff._id}}">{{staff.displayName}}</option>
+                </select>
             </div>
         </div>
         <div class="col-sm-offset-2 col-sm-10">

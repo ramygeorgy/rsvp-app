@@ -5,6 +5,6 @@ angular.module('rsvpApp')
         staff: '/rsvpAdmin/staff',
         invite: '/rsvpAdmin/invite',
         contact: '/rsvpAdmin/contact',
-        event: '/rsvpAdmin/event'
+        event: '/rsvpAdmin/events'
     }
 });

@@ -28,7 +28,12 @@
                     <li><a href="#/clients">Clients</a></li>
                     <li><a href="#/events">Events</a></li>
                     <li><a href="#/staff">Staff</a></li>
-                    <li><a href ng-click="logout()">Logout</a></li>
+                    <li class="user-account-menu-item"><a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser().displayName}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/myaccount">My Account</a></li>
+                            <li><a href ng-click="logout();">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nav nav-pills" ng-show="!isLoggedIn()" class="ng-hide">
                     <li><a href ng-click="login()">Login</a></li>

@@ -6,7 +6,7 @@
         <ul class="list-group">
             <li ng-repeat="staff in staffList"  class="list-group-item">
                 <a href ng-click='viewStaffDetail(staff._id);'>{{staff.displayName}}
-                    <button type="button" class="btn btn-danger pull-right removeBtn" ng-click="removeStaff(staff._id,$event);">Remove</button>
+                    <button type="button" class="btn btn-danger pull-right removeBtn" ng-click="removeStaff(staff._id,$event);" ng-if="currentUser._id !== staff._id">Remove</button>
                 </a>
             </li>
         </ul>

@@ -5,24 +5,29 @@ angular.module('rsvpApp')
     service.isAuthenticated = function() {
         var authenticated = false;
         var userInfo = $cookies.getObject("RSVPUser");
-        if(userInfo && userInfo.username && userInfo.username.length > 0)
+        if(userInfo && userInfo.userId && userInfo.userId.length > 0)
         {
             authenticated = true;
         }
         return authenticated;
     };
     
+    service.currentUser = function(){
+        var userInfo = $cookies.getObject("RSVPUser");
+        return userInfo.userDetail;
+    };
+    
     service.AuthenticateLogin = function(loginInfo) {
         var authenticated = false;
         
-        if(loginInfo && loginInfo.username && loginInfo.password)
+        if(loginInfo && loginInfo.userId) /* && loginInfo.password) */
         {
-            authenticated = (loginInfo.username === 'test' && loginInfo.password === 'test');
+            authenticated = true; /*(loginInfo.username === 'test' && loginInfo.password === 'test');*/
             if(authenticated)
             {
                 var userInfo = {};
-                userInfo.username = loginInfo.username;
-                userInfo.name = "Test";
+                userInfo.userId = loginInfo.userId;
+                userInfo.userDetail = loginInfo.userDetail;
                 
                 $cookies.putObject("RSVPUser",userInfo);
             }
