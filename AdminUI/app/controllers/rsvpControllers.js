@@ -38,21 +38,25 @@ angular.module('rsvpApp')
 .controller('eventsController',['$scope','$log','rsvpEventsFactory','rsvpAuthenticationService',function($scope,$log, rsvpEventsFactory, rsvpAuthenticationService) {
     $scope.eventsList = [];
     $scope.eventDetail = {};
+    
+    $scope.eventDate = {};
+    
     $scope.newEvent = false;
     
     $scope.currentUser = {};
     
     $scope.viewEventDetail = function(eventId) {
-        $log.log('event:' + eventId);
-        var list = $scope.eventList;
+        var list = $scope.eventsList;
         if(list && list.length > 0)
         {
             $scope.eventDetail = list.filter(function(event,index) { return event._id === eventId;})[0];
+            $scope.eventDate.dt = $scope.eventDetail.dateTime;
         }
     };
     
     $scope.createNewEventDetail = function() {
         $scope.eventDetail = {name:''};
+        $scope.eventDate = {};
         $scope.newEvent = true;
     };
     
@@ -71,7 +75,7 @@ angular.module('rsvpApp')
             ret.then(function(data) {
                 if(data === true)
                 {
-                       retrieveEventsList();                    
+                       retrieveEventList();                    
                 }
                 else {
                     console.log('Unable to update events');
@@ -84,6 +88,9 @@ angular.module('rsvpApp')
     };
     
     $scope.saveEventDetail = function() {
+        $scope.eventDetail.dateTime = $scope.eventDate.dt;
+        $log.log($scope.eventDetail.dateTime);
+        $log.log($scope.eventDate);
         var ret = rsvpEventsFactory.saveEvent($scope.eventDetail);
         if(ret)
         {
@@ -230,4 +237,50 @@ angular.module('rsvpApp')
 }])
 
 .controller('clientsController',['$scope','$log',function($scope,$log) {
+}])
+
+.controller('datePickerController',['$scope','$log',function($scope,$log) {
+    $scope.today = function() {
+        $scope.eventDate.dt = new Date();
+    };
+    $scope.initDate = function() {
+        if(!$scope.eventDate || !$scope.eventDate.dt)
+        {
+            $scope.today();
+        }
+    };
+    $scope.initDate();
+
+    $scope.clear = function () {
+        $scope.eventDate.dt = null;
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+        //return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        return false;
+    };
+
+    $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+
+    $scope.open = function($event) {
+        $scope.status.opened = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+
+    $scope.status = {
+        opened: false
+    };
+    
+    
 }]);

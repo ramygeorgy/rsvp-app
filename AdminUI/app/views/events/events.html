@@ -4,7 +4,7 @@
     <div class="eventsListContainer" ng-hide="!!eventDetail._id || newEvent">
         
         <ul class="list-group">
-            <li ng-repeat="event in events"  class="list-group-item">
+            <li ng-repeat="event in eventsList"  class="list-group-item">
                 <a href ng-click='viewEventDetail(event._id);'>{{event.name}}
                     <button type="button" class="btn btn-danger pull-right removeBtn" ng-click="removeEvent(event._id,$event);">Remove</button>
                 </a>
@@ -16,10 +16,32 @@
         <form ng-submit="saveEventDetail();" class="form-horizontal">
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Event Name</label>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <input id="name" class="form-control input-lg" type="text" ng-model="eventDetail.name">
                 </div>
-                
+            </div>
+            <div class="form-group">
+                <label for="dateTime" class="col-sm-2 control-label">Date</label>
+                <div class="col-sm-4">
+                    <p class="input-group" ng-controller="datePickerController">
+                        <input type="text" class="form-control input-lg" datepicker-popup="{{format}}" ng-model="eventDate.dt" is-open="status.opened" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default btn-lg" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="location" class="col-sm-2 control-label">Location</label>
+                <div class="col-sm-4">
+                    <input id="location" class="form-control input-lg" type="text" ng-model="eventDetail.location">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-4">
+                    <input id="description" class="form-control input-lg" type="text" ng-model="eventDetail.description">
+                </div>
             </div>
             
             <div class="col-sm-offset-2 col-sm-10">

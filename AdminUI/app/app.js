@@ -3,6 +3,8 @@
 angular.module('rsvpApp', [
     'ngRoute',
     'ngCookies',
+    'ngAnimate', 
+    'ui.bootstrap'
 ])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider

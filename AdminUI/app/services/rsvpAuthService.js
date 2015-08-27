@@ -13,8 +13,10 @@ angular.module('rsvpApp')
     };
     
     service.currentUser = function(){
-        var userInfo = $cookies.getObject("RSVPUser");
-        return userInfo.userDetail;
+        var userInfo = $cookies.getObject("RSVPUser") || {};
+        var ret = userInfo.userDetail || {};
+        
+        return ret;
     };
     
     service.AuthenticateLogin = function(loginInfo) {
