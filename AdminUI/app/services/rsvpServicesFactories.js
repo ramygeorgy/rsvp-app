@@ -7,7 +7,8 @@ angular.module('rsvpApp')
     {
         return $http.get(restConfig.baseURL + restConfig.resources.staff).success(function(data) {
             return data;
-        }).then(function(response) { return response.data; }, function(error) { console.error('Staff Service:  Error retrieving staff (' + error + ')'); });
+        }).then(function(response) { return response.data; }, function(error) { console.error('Staff Service:  Error retrieving staff:');
+                                                                               console.error(error); });
     };
     
     service.saveStaff = function(staffDetail)
@@ -178,14 +179,181 @@ angular.module('rsvpApp')
     return service;
 })
 
-.factory('rsvpContactsFactory',function($http, $q) {
+.factory('rsvpClientFactory',function($http, $q, restConfig) {
     var service = {};
+    
+    service.getClients = function()
+    {
+        return $http.get(restConfig.baseURL + restConfig.resources.client).success(function(data) {
+            return data;
+        }).then(function(response) { return response.data; }, function(error) { console.error('Clients Service:  Error retrieving clients:'); console.error(error); });
+    };
+    
+    service.saveEvent = function(eventDetail)
+    {
+        var ret = false;
+        if(eventDetail && eventDetail._id && eventDetail._id.length > 0)
+        {
+            return updateEvent(eventDetail);
+        }
+        else 
+        {
+            return createEvent(eventDetail);
+        }
+        
+        return ret;
+    };
+    
+    service.removeEvent = function(eventId)
+    {
+        var ret = false;
+        var deleteURL = restConfig.baseURL + restConfig.resources.event + '/' + eventId;
+        
+        ret = $http.delete(deleteURL)
+                .success(function(data) {
+                    return data;
+                })
+                .then(function(response) {
+                        return true;
+                    },
+                      function(error) {
+                        console.log('delete error: ' + error);
+                    });
+        return ret;
+    };
+    
+    function updateEvent(eventDetail)
+    {
+        var ret = false;
+        var putURL = restConfig.baseURL + restConfig.resources.event + '/' + eventDetail._id;
+                        
+        ret = $http
+                .put( putURL , {'eventDetail': eventDetail})
+                .success(function(data) {
+                    return data;
+                })
+                .then(function(response) { 
+                        if(response.data && response.data.ok && response.data.ok === 1)
+                        {
+                            return true;
+                        }
+                        return false;
+                    },
+                    function(error) { 
+                        return false;
+                    });
+        return ret;
+    }
+    
+    function createEvent(eventDetail)
+    {
+        var ret = false;
+        var postURL = restConfig.baseURL + restConfig.resources.event;
+                        
+        ret = $http
+                .post( postURL , {'itemDetail': eventDetail})
+                .success(function(data) {
+                    return data;
+                })
+                .then(function(response) { 
+                        return response.data;
+                    },
+                    function(error) { 
+                        console.error('Client Service:  Error creating event (' + error + ')');
+                        return false;
+                    });
+        return ret;
+    }
+    
     
     return service;
 })
 
-.factory('rsvpInvitesFactory',function($http, $q) {
+.factory('rsvpInvitesFactory',function($http, $q, restConfig) {
     var service = {};
     
+    service.getInvites = function()
+    {
+        return $http.get(restConfig.baseURL + restConfig.resources.invite).success(function(data) {
+            return data;
+        }).then(function(response) { return response.data; }, function(error) { console.error('Invites Service:  Error retrieving events:'); console.error(error); });
+    };
+    
+    service.saveInvite = function(eventInvite)
+    {
+        var ret = false;
+        if(eventInvite && eventInvite._id && eventInvite._id.length > 0)
+        {
+            return updateInvite(eventInvite);
+        }
+        else 
+        {
+            return createInvite(eventInvite);
+        }
+        
+        return ret;
+    };
+    
+    service.removeInvite = function(eventInviteId)
+    {
+        var ret = false;
+        var deleteURL = restConfig.baseURL + restConfig.resources.invite + '/' + eventInviteId;
+        
+        ret = $http.delete(deleteURL)
+                .success(function(data) {
+                    return data;
+                })
+                .then(function(response) {
+                        return true;
+                    },
+                      function(error) {
+                        console.log('delete error: ' + error);
+                    });
+        return ret;
+    };
+    
+    function updateInvite(eventInvite)
+    {
+        var ret = false;
+        var putURL = restConfig.baseURL + restConfig.resources.invite + '/' + eventInvite._id;
+                        
+        ret = $http
+                .put( putURL , {'eventInvite': eventInvite})
+                .success(function(data) {
+                    return data;
+                })
+                .then(function(response) { 
+                        if(response.data && response.data.ok && response.data.ok === 1)
+                        {
+                            return true;
+                        }
+                        return false;
+                    },
+                    function(error) { 
+                        return false;
+                    });
+        return ret;
+    }
+    
+    function createInvite(eventInvite)
+    {
+        var ret = false;
+        var postURL = restConfig.baseURL + restConfig.resources.invite;
+                        
+        ret = $http
+                .post( postURL , {'eventInvite': eventInvite})
+                .success(function(data) {
+                    return data;
+                })
+                .then(function(response) { 
+                        return response.data;
+                    },
+                    function(error) { 
+                        console.error('Invite Service:  Error creating invite (' + error + ')');
+                        return false;
+                    });
+        return ret;
+    }
+        
     return service;
 });

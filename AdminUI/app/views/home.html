@@ -1,4 +1,38 @@
 <div ng-controller="homeController" class="rsvp-container home-container">
-        <h1>RSVP - Home</h1>
+        <h1>RSVP - Dashboard</h1>
 
+    <!-- EVENT DASHBOARD -->
+    <!-- select event, add new event -->
+    <div class="form-inline">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">
+                <label for="selectEvent">Event</label>
+            </span>
+            <select name="selectEvent" id="selectEvent" class="form-control" 
+                    ng-options="event.name for event in eventsList track by event._id"
+                    ng-model="selectedEvent" ng-change="onChangeSelectedEvent()"></select>
+            
+        </div>
+        <button type="button" class="btn btn-primary">Add New Event</button>
+    </div>
+    
+    <div class="panel panel-default eventDashboard" ng-if="selectedEvent">
+        <div class="panel-heading">
+            {{ selectedEvent.name }} Dashboard
+        </div>
+        <div class="panel-body">
+            <!-- SEE INVITE LIST -->
+            <!-- action: export invite list -->
+
+            <!-- SEE RSVP LIST -->
+            
+            <!-- INVITE CUSTOMER TO EVENT -->
+            <!-- select customer, add new customer -->
+            <!-- invite customer action -->
+        
+            
+        </div>
+    </div>
+    
+    
 </div>

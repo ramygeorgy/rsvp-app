@@ -22,7 +22,7 @@ module.exports = function(rsvpRouter)
         
             if(itemModel)
             {
-                itemModel.find({},function(err, list){
+                itemModel.find({},'_id name location description dateTime',function(err, list){
                     
                     if(err)
                         res.status(500).send(err);
@@ -67,7 +67,7 @@ module.exports = function(rsvpRouter)
             {
                 var modelId = req.params.eventId;
                 
-                model.findById(modelId, '', function(err, models){
+                model.findById(modelId, '_id name location description dateTime', function(err, models){
                     
                     if(err)
                         res.status(500).send(err);

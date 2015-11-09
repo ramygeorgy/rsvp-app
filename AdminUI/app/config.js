@@ -3,8 +3,8 @@ angular.module('rsvpApp')
     'baseURL': 'http://localhost:8000/api',
     'resources': {
         staff: '/rsvpAdmin/staff',
-        invite: '/rsvpAdmin/invite',
-        contact: '/rsvpAdmin/contact',
+        invite: '/rsvpAdmin/invites',
+        client: '/rsvpAdmin/contacts',
         event: '/rsvpAdmin/events'
     }
 });

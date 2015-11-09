@@ -32,7 +32,27 @@ angular.module('rsvpApp')
     
 }])
                                                     
-.controller('homeController',['$scope','$log',function($scope,$log) {
+.controller('homeController',['$scope','$log','rsvpAuthenticationService','rsvpEventsFactory',function($scope,$log, AuthService,rsvpEventsFactory) {
+    $scope.eventsList;
+    
+    $scope.onChangeSelectedEvent = function() {
+        
+    };
+    
+    function retrieveEventList()
+    {
+        rsvpEventsFactory.getEvents().then(function(data) {
+            $scope.eventsList = data;
+        });
+        
+        
+    }
+    
+    (function init(){
+        retrieveEventList();
+        
+        //$scope.currentUser = rsvpAuthenticationService.currentUser();
+     })();
 }])
 
 .controller('eventsController',['$scope','$log','rsvpEventsFactory','rsvpAuthenticationService',function($scope,$log, rsvpEventsFactory, rsvpAuthenticationService) {
@@ -236,7 +256,68 @@ angular.module('rsvpApp')
      })();
 }])
 
-.controller('clientsController',['$scope','$log',function($scope,$log) {
+.controller('clientsController',['$scope','$log','rsvpAuthenticationService','rsvpClientFactory',function($scope,$log,rsvpAuthenticationService,rsvpClientFactory) {
+    $scope.clientList = [];
+    $scope.clientDetail = {};
+    
+    $scope.newClient = false;
+    
+    $scope.currentUser = {};
+    
+    $scope.viewClientDetail = function(clientId) {
+        $log.log('client:' + clientId);
+        var list = $scope.clientList;
+        if(list && list.length > 0)
+        {
+            $scope.clientDetail = list.filter(function(client,index) { return client._id === clientId;})[0];
+        }
+    };
+    
+    $scope.createNewClientDetail = function() {
+        $scope.clientDetail = {displayName:'',firstName:'',lastName:''};
+        $scope.newClient = true;
+    };
+    
+    $scope.closeClientDetail = function() {
+        $scope.clientDetail = {};
+        $scope.newClient = false;
+    };
+    
+    $scope.removeClient = function(clientId,$event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        
+        var ret = rsvpClientFactory.removeClient(clientId);
+        if(ret)
+        {
+            ret.then(function(data) {
+                if(data === true)
+                {
+                       retrieveClientList();                    
+                }
+                else {
+                    console.log('Unable to update client');
+                }
+            });
+        }
+        else{
+            console.log('could not remove client');
+        }
+    };
+    
+    function retrieveClientList()
+    {
+        rsvpClientFactory.getClients().then(function(data) {
+            $scope.clientList = data;
+        });
+    }
+    
+    (function init(){
+        retrieveClientList();
+        
+        $scope.currentUser = rsvpAuthenticationService.currentUser();
+     })();
+    
 }])
 
 .controller('datePickerController',['$scope','$log',function($scope,$log) {

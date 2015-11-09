@@ -1,4 +1,14 @@
 <div ng-controller="clientsController" class="rsvp-container clients-container">
         <h1>RSVP - Clients</h1>
 
+        <div class="clientListContainer" ng-hide="!!clientDetail._id || newClient">
+            <ul class="list-group">
+                <li ng-repeat="client in clientList"  class="list-group-item">
+                    <a href ng-click='viewClientDetail(client._id);'>{{client.displayName}}
+                        <button type="button" class="btn btn-danger pull-right removeBtn" ng-click="removeClient(client._id,$event);">Remove</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    
 </div>
