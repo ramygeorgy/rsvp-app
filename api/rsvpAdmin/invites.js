@@ -15,7 +15,8 @@ module.exports = function(rsvpRouter)
         
         return ret;
     }
-
+    
+    
     rsvpRouter.route('/events/:eventId/invites')
 	   .get(function(req, res) {
             
@@ -47,20 +48,19 @@ module.exports = function(rsvpRouter)
                 
                 if(itemDetail && itemDetail.inviteeid && itemDetail.inviteeid.length > 0)
                 {
-                    var newInvite = itemModel.invites.create(itemDetail);
-                    
-                    itemModel.invites.push(newInvite);
-                    
-                    itemModel.save(function(err, newItem){
-                    
-                        if(err)
-                        {
-                            res.status(500).send(err);
-                        }
-                        else
-                        {
-                            res.json(newItem.invites.id(newInvite._id));
-                        }
+                    itemModel.findById(modelId,'',function(err,doc) {
+                        var newInvite = doc.invites.create(itemDetail);
+                        doc.invites.push(newInvite);
+                        doc.save(function(err, newItem){
+                            if(err)
+                            {
+                                res.status(500).send(err);
+                            }
+                            else
+                            {
+                                res.json(newItem.invites.id(newInvite._id));
+                            }
+                        });
                     });
                     
                 }
@@ -101,7 +101,7 @@ module.exports = function(rsvpRouter)
                 var modelId = req.params.eventId;
                 var modelSubId = req.params.inviteId;
                 
-                var modelDetail = req.body.eventDetail;
+                var modelDetail = req.body.itemDetail;
                 
                 if(modelId && modelId.length > 0 && modelDetail && modelDetail._id && modelDetail._id.length > 0)
                 {
@@ -119,7 +119,7 @@ module.exports = function(rsvpRouter)
                             }
                             else
                             {
-                                res.json(doc);
+                                res.json(doc.invites.id(modelSubId));
                             }
                         }
                     );
